@@ -1,16 +1,26 @@
 syntax = "proto3";
 package employee;
 
-
 message EmployeeRequest {
  int32 numbers = 1;
 }
-
 message EmployeeResponse {
   int32 result = 1;
 }
 
+message EmployeeDataRequest{
+  int32 id = 1;
+  string name = 2;
+}
+message EmployeeDataResponse{
+  int32 id = 1;
+  string name = 2;
+}
+
+message Empty{}
+
 service EmployeeService {
   rpc Employee (EmployeeRequest) returns (EmployeeResponse);
+  rpc findAllEmployee(Empty) returns (EmployeeDataResponse);
 }
 

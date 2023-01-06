@@ -1,7 +1,7 @@
 import { Controller, Inject, OnModuleInit } from '@nestjs/common';
 import { GrpcMethod, ClientGrpc } from '@nestjs/microservices';
 import { EmployeeServiceClient } from './interfaces/employee.interface';
-
+// import { Employee } from "../../../data/employee.dto";
 interface EmployeeRequest {
   a: number;
 }
@@ -17,16 +17,23 @@ export class AppController implements OnModuleInit {
       'EmployeeService'
     );
   }
-// let data = 123;
+
   @GrpcMethod('EmployeeApiService', 'EmployeeApi')
   EmployeeApi(body: EmployeeRequest) {
     console.log(body);
     let data=this.employeeService.Employee({ numbers: body.a }).toPromise();
-  // console.log(data);
     return data
   }
   // EmployeeApi(body) {
   //   console.log(body);
   //   return this.employeeService.Employee(body).toPromise();
   // }
+
+  //  @Get('/findAll')
+  @GrpcMethod('EmployeeApiService', 'findAllEmployeeApi')
+  findAllEmployeeApi(){
+return this.employeeService.findAllEmployee({})
+}
+
+
 }

@@ -4,12 +4,30 @@ package employeeApi;// gateway
 message EmployeeApiRequest {
   int32 a = 1;
 }
-
 message EmployeeApiResponse {
   int32 result = 1;
 }
 
+message EmployeeApiDataRequest{
+  int32 id = 1;
+  string name = 2;
+}
+message EmployeeApiDataResponse{
+  int32 id = 1;
+  string name = 2;
+// repeated EmployeeApiDataRequest emp=1;
+}
+
+message arrayEmp {
+repeated EmployeeApiDataResponse emp=1;
+}
+message Empty{}
+
+
 service EmployeeApiService {
   rpc EmployeeApi (EmployeeApiRequest) returns (EmployeeApiResponse);
+  // rpc findAllEmployeeApi(Empty) returns (EmployeeApiDataResponse);
+  rpc findAllEmployeeApi(Empty) returns (arrayEmp);
+
 }
 
