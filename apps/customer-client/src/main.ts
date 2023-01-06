@@ -7,34 +7,27 @@ import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import * as path from 'path';
-
 import { AppModule } from './app/app.module';
 
 async function bootstrap() {
-
-  const port  = 'localhost:3001';
-  const app = await NestFactory.createMicroservice<MicroserviceOptions>
-  (
+  const URL = 'localhost:3002';
+  const app = await NestFactory.createMicroservice<MicroserviceOptions>(
     AppModule,
     {
-      transport:Transport.GRPC,
+      transport: Transport.GRPC,
       options: {
-        url: port,
-        package: 'employeeApi',
-        protoPath: path.resolve(__dirname, '../../../proto/employee-api.proto'),
-        loader: {
-          includeDirs: [path.resolve(__dirname, '../../')],
-        },
+        url: URL,
+        package: 'employee',
+        protoPath: path.resolve(__dirname, '../../../proto/employee.proto'),
       },
     },
   );
-
-  await app.listen();
-  // await app.listen();
   // const globalPrefix = 'api';
   // app.setGlobalPrefix(globalPrefix);
+  // const port = process.env.PORT || 3333;
+  await app.listen();
   Logger.log(
-    `🚀 Application is running on: http://${port}`
+    `🚀 Application is running on: ${URL}`
   );
 }
 

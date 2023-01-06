@@ -1,0 +1,15 @@
+syntax = "proto3";
+package employeeApi;// gateway
+
+message EmployeeApiRequest {
+  int32 a = 1;
+}
+
+message EmployeeApiResponse {
+  int32 result = 1;
+}
+
+service EmployeeApiService {
+  rpc EmployeeApi (EmployeeApiRequest) returns (EmployeeApiResponse);
+}
+

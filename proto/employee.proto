@@ -1,0 +1,16 @@
+syntax = "proto3";
+package employee;
+
+
+message EmployeeRequest {
+ int32 numbers = 1;
+}
+
+message EmployeeResponse {
+  int32 result = 1;
+}
+
+service EmployeeService {
+  rpc Employee (EmployeeRequest) returns (EmployeeResponse);
+}
+
